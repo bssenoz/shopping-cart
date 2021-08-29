@@ -2,11 +2,10 @@
   <div class="yonetim">
     <h1>Yönetim</h1>
     <br /><br />
-
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item">
         <router-link
-          to="/yonetim/stok"
+          to="/Yonetim/Stok"
           a
           class="nav-link active"
           id="home-tab"
@@ -18,10 +17,9 @@
           >Stok</router-link
         >
       </li>
-
       <li class="nav-item">
         <router-link
-          to="/yonetim/cuzdan"
+          to="/Yonetim/Cuzdan"
           a
           class="nav-link"
           id="contact-tab"
@@ -34,22 +32,14 @@
         >
       </li>
     </ul>
-
-    
-      <!-- <p v-if="sellWarning" style="color:red;font-weight: bold;">Girdiğiniz miktar stok adetlerinden fazla!</p>-->
-      <router-view :diziler="diziler"></router-view>
-    </div>
- 
+    <router-view :arrays="arrays"></router-view>
+  </div>
 </template>
 
 <script>
-
 export default {
-  name: "yonetim",
-  props: ["diziler"],
-  methods: {
-    
-  },
+  name: "Yonetim",
+  props: ["arrays"],
 };
 </script>
 

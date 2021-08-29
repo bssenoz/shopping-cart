@@ -6,13 +6,13 @@
       type="number"
       min="0"
       v-model="sellCount"
+      id="sellCount"
       placeholder="Ürün miktarı"
       style="margin-left: 16%; width: 16%"
     /><br /><br /><br />
-
     <div class="stok">
       <row :gutter="12">
-        <div v-for="product in diziler.productList" :key="product.name">
+        <div v-for="product in arrays.productList" :key="product.name">
           <column :lg="4">
             <div class="border">
               <strong>{{ product.name }}</strong>
@@ -23,7 +23,7 @@
                 value="Stoktan Kaldır"
                 v-on:click="removeFromProduct(product)"
                 class="btn btn-warning"
-                @click="getAlert2"
+                @click="getAlert"
                 style="cursor: pointer; width: 45%; height: 10%"
               /><br /><br />
               <p v-if="product.count != 0">
@@ -56,37 +56,31 @@
         </div>
       </row>
     </div>
-
-    <p v-if="sellWarning" style="color: red; font-weight: bold">
-      Girdiğiniz miktar stok adetlerinden fazla!
-    </p>
-    <router-view></router-view>
   </div>
 </template>
 <script>
 export default {
-  name: "stok",
-  props: ["diziler"],
+  name: "Stok",
+  props: ["arrays"],
   methods: {
     removeFromProduct(product) {
-      this.diziler.productList.splice(
-        this.diziler.productList.indexOf(product),
+      this.arrays.productList.splice(
+        this.arrays.productList.indexOf(product),
         1
       );
-      console.log(this.diziler.productList);
     },
     sellProduct(product) {
       if (this.sellCount > product.count) {
-        this.sellWarning = true;
+        alert("Girdiğiniz miktar stok adetlerinden fazla!");
       } else {
         product.count = product.count - this.sellCount;
-        this.sellWarning = false;
       }
     },
     addProduct(product) {
-      product.count = product.count += this.sellCount;
+      var sellCount = Number(document.getElementById("sellCount").value);
+      product.count = product.count + sellCount;
     },
-    getAlert2: function () {
+    getAlert() {
       alert("Ürün stoktan kaldırıldı.");
     },
   },
